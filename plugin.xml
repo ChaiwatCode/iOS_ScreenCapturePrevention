@@ -1,10 +1,7 @@
-<platform name="ios">
-    <header-file src="src/ios/SecureTextField.swift" />
-    <source-file src="src/ios/SecureTextField.swift" />
-    <framework src="UIKit.framework" />
-    <config-file target="config.xml" parent="/*">
-        <feature name="SecureTextField">
-            <param name="ios-package" value="SecureTextField" />
-        </feature>
-    </config-file>
-</platform>
+<plugin id="com.example.screen-capture-prevention" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+    <name>ScreenCapturePrevention</name>
+    <description>Prevents iOS screen capture and screenshots.</description>
+    <platform name="ios">
+        <source-file src="src/ios/SecureTextField.swift" />
+    </platform>
+</plugin>
