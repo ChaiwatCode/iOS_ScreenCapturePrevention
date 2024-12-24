@@ -1,0 +1,13 @@
+{
+    "name": "cordova-plugin-secure-window",
+    "version": "1.0.0",
+    "description": "A Cordova plugin to secure the UIWindow.",
+    "cordova": {
+      "id": "cordova-plugin-secure-window",
+      "platforms": ["ios"]
+    },
+    "keywords": ["cordova", "secure", "screenshot prevention"],
+    "author": "Your Name",
+    "license": "MIT"
+  }
+  

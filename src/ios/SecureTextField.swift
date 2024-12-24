@@ -5,13 +5,15 @@ import UIKit
 class SecureWindow: CDVPlugin {
     @objc(makeSecure:)
     func makeSecure(command: CDVInvokedUrlCommand) {
-        if let window = UIApplication.shared.windows.first {
-            window.makeSecure()
-            let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Window secured")
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        } else {
-            let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Failed to secure window")
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        DispatchQueue.main.async {
+            if let window = UIApplication.shared.windows.first {
+                window.makeSecure()
+                let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Window secured")
+                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+            } else {
+                let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Failed to secure window")
+                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+            }
         }
     }
 }

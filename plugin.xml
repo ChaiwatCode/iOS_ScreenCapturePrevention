@@ -1,10 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="cordova-plugin-secure-window"
         version="1.0.0">
-    <name>SecureWindow</name>
+    <name>Secure Window</name>
+    <description>A Cordova plugin to secure the UIWindow.</description>
+    <license>MIT</license>
+    <keywords>cordova, secure, screenshot prevention</keywords>
+
     <js-module name="secure-window" src="www/secure-window.js">
         <clobbers target="SecureWindow" />
     </js-module>
+
     <platform name="ios">
         <source-file src="src/ios/SecureWindow.swift" />
     </platform>
