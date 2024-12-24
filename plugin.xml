@@ -1,0 +1,10 @@
+<platform name="ios">
+    <header-file src="src/ios/SecureTextField.swift" />
+    <source-file src="src/ios/SecureTextField.swift" />
+    <framework src="UIKit.framework" />
+    <config-file target="config.xml" parent="/*">
+        <feature name="SecureTextField">
+            <param name="ios-package" value="SecureTextField" />
+        </feature>
+    </config-file>
+</platform>
