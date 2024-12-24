@@ -1,7 +1,12 @@
-<plugin id="com.example.screen-capture-prevention" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
-    <name>ScreenCapturePrevention</name>
-    <description>Prevents iOS screen capture and screenshots.</description>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-secure-window"
+        version="1.0.0">
+    <name>SecureWindow</name>
+    <js-module name="secure-window" src="www/secure-window.js">
+        <clobbers target="SecureWindow" />
+    </js-module>
     <platform name="ios">
-        <source-file src="src/ios/SecureTextField.swift" />
+        <source-file src="src/ios/SecureWindow.swift" />
     </platform>
 </plugin>
+
