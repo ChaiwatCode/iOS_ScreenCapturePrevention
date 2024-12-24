@@ -9,4 +9,3 @@
         <source-file src="src/ios/SecureWindow.swift" />
     </platform>
 </plugin>
-
