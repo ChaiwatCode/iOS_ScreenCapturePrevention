@@ -3,6 +3,7 @@ import UIKit
 
 @objc(SecureWindow)
 class SecureWindow: CDVPlugin {
+    
     @objc(makeSecure:)
     func makeSecure(command: CDVInvokedUrlCommand) {
         DispatchQueue.main.async {
@@ -14,14 +15,14 @@ class SecureWindow: CDVPlugin {
             }
 
             if #available(iOS 13.0, *) {
-                // Use isSecure to prevent screenshots and screen recordings
+                // Use isSecure to prevent screenshots and screen recordings on iOS 13+
                 window.isSecure = true
                 if window.isSecure {
                     self.showDebugMessage("Success: Screenshot protection enabled (iOS 13+).")
                     let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Screenshot protection enabled (iOS 13+)")
                     self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
                 } else {
-                    self.showDebugMessage("Error: Failed to enable screenshot protection on iOS 13+.")
+                    self.showDebugMessage("Error: Failed to enable screenshot protection on iOS 13+. Please check device settings.")
                     let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Failed to enable screenshot protection")
                     self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
                 }
@@ -55,7 +56,7 @@ class SecureWindow: CDVPlugin {
         DispatchQueue.main.async {
             guard let viewController = self.viewController else { return }
 
-            // Create and present an alert
+            // Create and present an alert for debugging
             let alert = UIAlertController(title: "Debug Message", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             viewController.present(alert, animated: true, completion: nil)
