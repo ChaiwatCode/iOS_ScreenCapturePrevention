@@ -12,6 +12,8 @@
     </js-module>
 
     <platform name="ios">
-        <source-file src="src/ios/SecureWindow.swift" />
+    <preference name="UseSwiftLanguageVersion" value="5.6" />
+    <!-- Specify the Swift source file -->
+    <source-file src="src/ios/SecureWindow.swift" />
     </platform>
 </plugin>
