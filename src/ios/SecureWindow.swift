@@ -28,16 +28,16 @@ class SecureWindow: CDVPlugin {
                 }
             } else {
                 // Fallback for iOS versions below 13.0: Apply blur effect
-                self.blurWindow(for: window)
-                self.showDebugMessage("Success: Blur effect applied for screenshot protection (iOS < 13).")
-                let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Blur effect applied (iOS < 13)")
-                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                //self.blurWindow(for: window)
+                //self.showDebugMessage("Success: Blur effect applied for screenshot protection (iOS < 13).")
+                //let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Blur effect applied (iOS < 13)")
+                //self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             }
         }
     }
 
     // Apply a blur effect to the window (for iOS < 13.0)
-    private func blurWindow(for window: UIWindow) {
+    /*private func blurWindow(for window: UIWindow) {
         let blurEffect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = window.bounds
@@ -50,6 +50,7 @@ class SecureWindow: CDVPlugin {
     private func removeBlurWindow(for window: UIWindow) {
         window.viewWithTag(999)?.removeFromSuperview()
     }
+    */
 
     // Helper method to display debug messages
     private func showDebugMessage(_ message: String) {
