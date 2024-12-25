@@ -3,35 +3,54 @@ import UIKit
 
 @objc(SecureWindow)
 class SecureWindow: CDVPlugin {
-    // Method to secure the window
     @objc(makeSecure:)
     func makeSecure(command: CDVInvokedUrlCommand) {
         DispatchQueue.main.async {
             guard let window = self.viewController?.view.window else {
-                self.showDebugMessage("Error: Failed to access the app's main window.")
-                let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Failed to secure window")
+                self.showDebugMessage("Error: Main window is unavailable.")
+                let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Main window unavailable")
                 self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
                 return
             }
 
-            // Attempt to secure the window
             if #available(iOS 13.0, *) {
+                // Use isSecure to prevent screenshots and screen recordings
                 window.isSecure = true
-                self.showDebugMessage("Success: The window has been secured.")
-                let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Window secured")
-                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                if window.isSecure {
+                    self.showDebugMessage("Success: Screenshot protection enabled (iOS 13+).")
+                    let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Screenshot protection enabled (iOS 13+)")
+                    self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                } else {
+                    self.showDebugMessage("Error: Failed to enable screenshot protection on iOS 13+.")
+                    let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Failed to enable screenshot protection")
+                    self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                }
             } else {
-                self.showDebugMessage("Error: isSecure is not available on iOS versions below 13.0.")
-                let pluginResult = CDVPluginResult(
-                    status: CDVCommandStatus_ERROR,
-                    messageAs: "isSecure is not supported on iOS versions below 13.0"
-                )
+                // Fallback for iOS versions below 13.0: Apply blur effect
+                self.blurWindow(for: window)
+                self.showDebugMessage("Success: Blur effect applied for screenshot protection (iOS < 13).")
+                let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Blur effect applied (iOS < 13)")
                 self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             }
         }
     }
 
-    // Helper method to display debug messages on the screen
+    // Apply a blur effect to the window (for iOS < 13.0)
+    private func blurWindow(for window: UIWindow) {
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = window.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurView.tag = 999 // Assign a unique tag to identify the blur view later
+        window.addSubview(blurView)
+    }
+
+    // Remove the blur effect if needed
+    private func removeBlurWindow(for window: UIWindow) {
+        window.viewWithTag(999)?.removeFromSuperview()
+    }
+
+    // Helper method to display debug messages
     private func showDebugMessage(_ message: String) {
         DispatchQueue.main.async {
             guard let viewController = self.viewController else { return }
