@@ -6,7 +6,7 @@ class SecureWindow: CDVPlugin {
     
     @objc(makeSecure:)
     func makeSecure(command: CDVInvokedUrlCommand) {
-        DispatchQueue.main.async {
+        /*DispatchQueue.main.async {
             guard let window = self.viewController?.view.window else {
                 self.showDebugMessage("Error: Main window is unavailable.")
                 let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Main window unavailable")
@@ -33,7 +33,7 @@ class SecureWindow: CDVPlugin {
                 //let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Blur effect applied (iOS < 13)")
                 //self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             }
-        }
+        }*/
     }
 
     // Apply a blur effect to the window (for iOS < 13.0)
@@ -53,7 +53,7 @@ class SecureWindow: CDVPlugin {
     */
 
     // Helper method to display debug messages
-    private func showDebugMessage(_ message: String) {
+    /*private func showDebugMessage(_ message: String) {
         DispatchQueue.main.async {
             guard let viewController = self.viewController else { return }
 
@@ -62,5 +62,5 @@ class SecureWindow: CDVPlugin {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             viewController.present(alert, animated: true, completion: nil)
         }
-    }
+    } */
 }
