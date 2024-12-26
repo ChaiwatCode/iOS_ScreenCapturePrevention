@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="com.ios.screenshotprevention" version="1.0.0" xmlns="http://apache.org/ns/cordova" xmlns:cdv="http://cordova.apache.org/ns/cordova">
+    <!-- Plugin Metadata -->
+    <name>iOS Screenshot Prevention</name>
+    <description>A Cordova plugin to prevent screenshots and screen recording on iOS devices.</description>
+    <author>ChaiwatCode</author>
+    <license>Apache 2.0</license>
+    <keywords>screenshot, prevention, ios</keywords>
+    
+    <!-- Platform Setup for iOS -->
+    <platform name="ios">
+        <!-- JavaScript Interface -->
+        <js-module src="www/ScreenCapturePrevention.js" name="ScreenCapturePrevention">
+            <clobbers target="cordova.plugins.ScreenCapturePrevention" />
+        </js-module>
+        
+        <!-- iOS Source Code -->
+        <source-file src="src/ios/ScreenCapturePrevention.m" framework="true" />
+    </platform>
+
+    <!-- Engine Compatibility -->
+    <engines>
+        <engine name="cordova" version=">=10.0.0" />
+    </engines>
+</plugin>
